@@ -1,61 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Dashboard SIPIRS</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/dashboard.css">
 
 </head>
 
-<body class="bg-light">
+<body>
 
-<div class="container py-5">
+<div class="d-flex">
 
-<h1>Dashboard SIPIRS</h1>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
 
-<p id="welcome"></p>
+        <h3 class="text-white text-center mb-4">
+            SIPIRS
+        </h3>
 
-<a
-class="btn btn-danger"
-onclick="logout()">
+        <a href="#">
+            <i class="bi bi-house-door"></i>
+            Dashboard
+        </a>
 
-Logout
+        <a href="#">
+            <i class="bi bi-file-earmark-text"></i>
+            Publikasi
+        </a>
 
-</a>
+        <a href="#">
+            <i class="bi bi-plus-circle"></i>
+            Tambah Publikasi
+        </a>
+
+        <a href="#">
+            <i class="bi bi-person"></i>
+            Profil
+        </a>
+
+        <a href="#">
+            <i class="bi bi-bar-chart"></i>
+            Statistik
+        </a>
+
+        <a href="#" onclick="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- NAVBAR -->
+        <div class="topbar">
+
+            <h4>Dashboard</h4>
+
+            <div id="userName"></div>
+
+        </div>
+
+        <div class="container-fluid mt-4">
+
+            <h2 id="welcome"></h2>
+
+            <p class="text-muted">
+                Selamat datang di Sistem Informasi Publikasi RSUP Surabaya.
+            </p>
+
+            <div class="row g-4 mt-2">
+
+                <div class="col-md-3">
+                    <div class="card-stat">
+                        <h5>Total Publikasi</h5>
+                        <h2 id="totalPub">0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-stat">
+                        <h5>Draft</h5>
+                        <h2>0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-stat">
+                        <h5>Terbit</h5>
+                        <h2>0</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-stat">
+                        <h5>Sitasi</h5>
+                        <h2>0</h2>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<script>
-
-const user =
-JSON.parse(localStorage.getItem("sipirsUser"));
-
-if(user){
-
-document.getElementById("welcome").innerHTML=
-
-"Selamat datang <b>"+user.nama+"</b><br>Role : "+user.role;
-
-}else{
-
-window.location.href="../pages/login.html";
-
-}
-
-function logout(){
-
-localStorage.removeItem("sipirsUser");
-
-window.location.href="../index.html";
-
-}
-
-</script>
+<script src="../js/dashboard.js"></script>
 
 </body>
-
 </html>
