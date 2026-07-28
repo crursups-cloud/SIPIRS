@@ -170,17 +170,21 @@ z-index:2;
 
 color:white;
 
-margin:auto;
+max-width:650px;
 
-padding:70px;
+margin-left:80px;
 
 }
 
 .hero-text h1{
 
-font-size:70px;
+font-size:72px;
 
-font-weight:700;
+font-weight:800;
+
+letter-spacing:3px;
+
+margin-bottom:20px;
 
 }
 
@@ -206,29 +210,39 @@ line-height:1.8;
 
 background:white;
 
-padding:50px;
+width:520px;
 
-border-radius:20px;
+max-width:90%;
 
-width:420px;
+padding:55px;
+
+border-radius:24px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.12);
 
 }
 
 .login-box input{
 
-height:52px;
+height:58px;
 
-border-radius:12px;
+border-radius:14px;
+
+padding-left:18px;
+
+font-size:16px;
 
 }
 
 .login-box .btn{
 
-height:52px;
+height:58px;
 
-font-weight:600;
+font-size:18px;
 
-border-radius:12px;
+font-weight:700;
+
+border-radius:14px;
 
 }
 
@@ -247,5 +261,25 @@ border:none;
 background:#005030;
 
 color:white;
+
+}
+
+.hero-line{
+
+width:90px;
+
+height:5px;
+
+background:#F4C430;
+
+margin:30px 0;
+
+border-radius:20px;
+
+}
+
+body{
+
+background:#EEF4F3;
 
 }
