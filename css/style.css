@@ -94,3 +94,41 @@ border-radius:12px;
 font-weight:600;
 
 }
+
+.login-page{
+
+background:#F4F7FA;
+
+}
+
+.login-card{
+
+border:none;
+
+border-radius:20px;
+
+}
+
+.login-card input{
+
+height:50px;
+
+border-radius:10px;
+
+}
+
+.login-card label{
+
+font-weight:600;
+
+margin-bottom:8px;
+
+}
+
+.login-card .btn{
+
+height:50px;
+
+font-size:18px;
+
+}
