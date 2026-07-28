@@ -226,3 +226,21 @@ font-weight:600;
 border-radius:12px;
 
 }
+
+.btn-kemenkes{
+
+background:#006B3F;
+
+color:white;
+
+border:none;
+
+}
+
+.btn-kemenkes:hover{
+
+background:#005030;
+
+color:white;
+
+}
