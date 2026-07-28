@@ -222,16 +222,11 @@ box-shadow:0 15px 40px rgba(0,0,0,.12);
 
 }
 
-.login-box input{
-
-height:58px;
-
-border-radius:14px;
-
-padding-left:18px;
-
-font-size:16px;
-
+.login-box input[type="email"],
+.login-box input[type="password"]{
+    height:58px;
+    border-radius:14px;
+    padding-left:18px;
 }
 
 .login-box .btn{
@@ -282,4 +277,19 @@ body{
 
 background:#EEF4F3;
 
+}
+
+.form-check{
+    margin-top:10px;
+    margin-bottom:25px;
+}
+
+.form-check-input{
+    cursor:pointer;
+}
+
+.form-check-label{
+    margin-left:6px;
+    cursor:pointer;
+    user-select:none;
 }
