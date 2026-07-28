@@ -1,0 +1,48 @@
+const API_URL = "https://script.google.com/macros/s/AKfycbx_nglSPAgsqihJ3Xn_oIj8EComgbuAtXsJ7V14J4tycZR_osEHpCZeXo6iMK3H8_YJ/exec";
+
+document
+.getElementById("loginForm")
+.addEventListener("submit", loginUser);
+
+async function loginUser(e){
+
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+
+    const password = document.getElementById("password").value.trim();
+
+    try{
+
+        const response = await fetch(
+            API_URL +
+            "?action=login" +
+            "&email=" + encodeURIComponent(email) +
+            "&password=" + encodeURIComponent(password)
+        );
+
+        const data = await response.json();
+
+        if(data.status){
+
+            alert("Login Berhasil. Selamat datang " + data.nama);
+
+            localStorage.setItem("sipirsUser",JSON.stringify(data));
+
+            window.location.href="../pages/dashboard.html";
+
+        }else{
+
+            alert(data.message);
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        alert("Tidak dapat terhubung ke server.");
+
+    }
+
+}
