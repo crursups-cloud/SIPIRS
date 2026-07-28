@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Dashboard SIPIRS</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container py-5">
+
+<h1>Dashboard SIPIRS</h1>
+
+<p id="welcome"></p>
+
+<a
+class="btn btn-danger"
+onclick="logout()">
+
+Logout
+
+</a>
+
+</div>
+
+<script>
+
+const user =
+JSON.parse(localStorage.getItem("sipirsUser"));
+
+if(user){
+
+document.getElementById("welcome").innerHTML=
+
+"Selamat datang <b>"+user.nama+"</b><br>Role : "+user.role;
+
+}else{
+
+window.location.href="../pages/login.html";
+
+}
+
+function logout(){
+
+localStorage.removeItem("sipirsUser");
+
+window.location.href="../index.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
