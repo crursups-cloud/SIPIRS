@@ -1,1 +1,84 @@
+body{
+    background:#F5F7FA;
+}
 
+.sidebar{
+
+width:250px;
+min-height:100vh;
+
+background:#006B3F;
+
+padding:25px;
+
+}
+
+.sidebar a{
+
+display:block;
+
+color:white;
+
+padding:12px;
+
+margin-bottom:10px;
+
+text-decoration:none;
+
+border-radius:10px;
+
+transition:.3s;
+
+}
+
+.sidebar a:hover{
+
+background:rgba(255,255,255,.2);
+
+}
+
+.content{
+
+flex:1;
+
+}
+
+.topbar{
+
+height:70px;
+
+background:white;
+
+padding:0 30px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.card-stat{
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+.card-stat h2{
+
+color:#006B3F;
+
+font-weight:700;
+
+}
