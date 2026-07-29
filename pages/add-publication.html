@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,261 +8,1069 @@
 
 <title>Tambah Publikasi | SIPIRS</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Bootstrap 5 -->
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+rel="stylesheet">
 
+<!-- Bootstrap Icons -->
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+rel="stylesheet">
+
+<!-- CSS SIPIRS -->
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/dashboard.css">
 
+<style>
+
+/* =========================
+   FORM PUBLIKASI
+========================= */
+
+.form-section {
+
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+
+}
+
+.form-section-title {
+
+    color: #006B3F;
+    font-weight: 700;
+    margin-bottom: 22px;
+
+}
+
+.form-label {
+
+    font-weight: 600;
+
+}
+
+.form-control,
+.form-select {
+
+    border-radius: 10px;
+    min-height: 48px;
+
+}
+
+textarea.form-control {
+
+    min-height: 140px;
+
+}
+
+.required {
+
+    color: #dc3545;
+
+}
+
+.author-card {
+
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 15px;
+
+}
+
+.btn-add-author {
+
+    border: 1px dashed #006B3F;
+    color: #006B3F;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 18px;
+
+}
+
+.btn-add-author:hover {
+
+    background: #006B3F;
+    color: white;
+
+}
+
+.page-title {
+
+    font-weight: 700;
+    color: #0F172A;
+
+}
+
+.page-subtitle {
+
+    color: #64748B;
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
 <div class="d-flex">
+
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
 
 <div class="sidebar">
 
-<h3 class="text-white text-center mb-4">
-SIPIRS
-</h3>
+    <h3 class="text-white text-center mb-4">
+        SIPIRS
+    </h3>
 
-<a href="dashboard.html">
-<i class="bi bi-house-door"></i>
-Dashboard
-</a>
 
-<a href="#">
-<i class="bi bi-file-earmark-text"></i>
-Publikasi
-</a>
+    <a href="dashboard.html">
 
-<a class="active" href="#">
-<i class="bi bi-plus-circle"></i>
-Tambah Publikasi
-</a>
+        <i class="bi bi-house-door"></i>
 
-<a href="#">
-<i class="bi bi-person"></i>
-Profil
-</a>
+        Dashboard
 
-<a href="#">
-<i class="bi bi-bar-chart"></i>
-Statistik
-</a>
+    </a>
 
-<a href="#" onclick="logout()">
-<i class="bi bi-box-arrow-right"></i>
-Logout
-</a>
+
+    <a href="#">
+
+        <i class="bi bi-file-earmark-text"></i>
+
+        Publikasi
+
+    </a>
+
+
+    <a href="add-publication.html">
+
+        <i class="bi bi-plus-circle"></i>
+
+        Tambah Publikasi
+
+    </a>
+
+
+    <a href="#">
+
+        <i class="bi bi-person"></i>
+
+        Profil
+
+    </a>
+
+
+    <a href="#">
+
+        <i class="bi bi-bar-chart"></i>
+
+        Statistik
+
+    </a>
+
+
+    <a href="#" onclick="logout()">
+
+        <i class="bi bi-box-arrow-right"></i>
+
+        Logout
+
+    </a>
 
 </div>
+
+
+
+<!-- =========================================
+     CONTENT
+========================================= -->
 
 <div class="content">
 
+
+<!-- TOPBAR -->
+
 <div class="topbar">
 
-<h4>Tambah Publikasi</h4>
+    <h4>
+
+        <i class="bi bi-plus-circle me-2"></i>
+
+        Tambah Publikasi
+
+    </h4>
+
+
+    <div id="userName"></div>
 
 </div>
 
-<div class="container py-4">
 
-<div class="card shadow border-0 rounded-4">
 
-<div class="card-body p-4">
+<!-- =========================================
+     MAIN CONTENT
+========================================= -->
 
-<h4 class="mb-4">
+<div class="container-fluid px-4 py-4">
 
-Informasi Publikasi
 
-</h4>
+    <!-- PAGE TITLE -->
+
+    <div class="mb-4">
+
+        <h2 class="page-title">
+
+            Tambah Publikasi
+
+        </h2>
+
+        <p class="page-subtitle">
+
+            Silakan lengkapi informasi publikasi ilmiah
+            yang akan didaftarkan ke SIPIRS.
+
+        </p>
+
+    </div>
+
+
 
 <form id="publicationForm">
 
-<div class="mb-3">
 
-<label class="form-label">
 
-Judul Publikasi
+<!-- =========================================
+     1. INFORMASI UTAMA
+========================================= -->
 
-</label>
+<div class="form-section">
 
-<input
-type="text"
-class="form-control"
-id="judul"
-required>
+    <h5 class="form-section-title">
 
-</div>
+        <i class="bi bi-journal-text me-2"></i>
 
-<div class="row">
+        Informasi Utama
 
-<div class="col-md-6">
+    </h5>
 
-<label class="form-label">
 
-Jenis Publikasi
 
-</label>
+    <!-- JUDUL -->
 
-<select
-id="jenis"
-class="form-select">
+    <div class="mb-3">
 
-<option>Artikel Jurnal</option>
+        <label class="form-label">
 
-<option>Prosiding</option>
+            Judul Publikasi
 
-<option>Buku</option>
+            <span class="required">*</span>
 
-<option>Book Chapter</option>
+        </label>
 
-</select>
+        <input
+            type="text"
+            class="form-control"
+            id="judul"
+            name="judul"
+            placeholder="Masukkan judul publikasi"
+            required>
 
-</div>
+    </div>
 
-<div class="col-md-6">
 
-<label class="form-label">
 
-Tahun
+    <div class="row g-3">
 
-</label>
 
-<input
-type="number"
-id="tahun"
-class="form-control"
-value="2026">
+        <!-- JENIS -->
 
-</div>
+        <div class="col-md-6">
 
-</div>
+            <label class="form-label">
 
-<div class="mt-3">
+                Jenis Publikasi
 
-<label class="form-label">
+                <span class="required">*</span>
 
-Nama Jurnal
+            </label>
 
-</label>
+            <select
+                class="form-select"
+                id="jenisPublikasi"
+                name="jenisPublikasi"
+                required>
 
-<input
-type="text"
-id="jurnal"
-class="form-control">
+                <option value="">
 
-</div>
+                    Pilih jenis publikasi
 
-<div class="row mt-3">
+                </option>
 
-<div class="col-md-6">
+                <!--
+                Akan diisi otomatis
+                dari 06_MASTER_JENIS_PUBLIKASI
+                -->
 
-<label class="form-label">
+            </select>
 
-DOI
+        </div>
 
-</label>
 
-<input
-type="text"
-id="doi"
-class="form-control">
 
-</div>
+        <!-- TAHUN -->
 
-<div class="col-md-6">
+        <div class="col-md-6">
 
-<label class="form-label">
+            <label class="form-label">
 
-URL
+                Tahun Terbit
 
-</label>
+                <span class="required">*</span>
 
-<input
-type="url"
-id="url"
-class="form-control">
+            </label>
 
-</div>
+            <input
+                type="number"
+                class="form-control"
+                id="tahunTerbit"
+                name="tahunTerbit"
+                min="1900"
+                max="2100"
+                placeholder="Contoh: 2026"
+                required>
 
-</div>
+        </div>
 
-<div class="mt-3">
 
-<label class="form-label">
+    </div>
 
-Status
 
-</label>
 
-<select
-id="status"
-class="form-select">
+    <!-- JURNAL -->
 
-<option>Draft</option>
+    <div class="mt-3">
 
-<option>Submitted</option>
+        <label class="form-label">
 
-<option>Accepted</option>
+            Nama Jurnal / Penerbit
 
-<option>Published</option>
+            <span class="required">*</span>
 
-</select>
+        </label>
 
-</div>
+        <input
+            type="text"
+            class="form-control"
+            id="namaJurnalPenerbit"
+            name="namaJurnalPenerbit"
+            placeholder="Masukkan nama jurnal atau penerbit"
+            required>
 
-<div class="mt-3">
-
-<label class="form-label">
-
-Abstrak
-
-</label>
-
-<textarea
-id="abstrak"
-class="form-control"
-rows="6"></textarea>
+    </div>
 
 </div>
 
-<div class="mt-4">
 
-<button
-class="btn btn-kemenkes">
 
-<i class="bi bi-check-circle"></i>
+<!-- =========================================
+     2. DETAIL PUBLIKASI
+========================================= -->
 
-Simpan
+<div class="form-section">
 
-</button>
+    <h5 class="form-section-title">
 
-<button
-type="reset"
-class="btn btn-outline-secondary">
+        <i class="bi bi-card-text me-2"></i>
 
-Reset
+        Detail Publikasi
 
-</button>
+    </h5>
+
+
+    <div class="row g-3">
+
+
+        <!-- VOLUME -->
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+
+                Volume
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="volume"
+                name="volume"
+                placeholder="Contoh: 12">
+
+        </div>
+
+
+
+        <!-- ISSUE -->
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+
+                Issue
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="issue"
+                name="issue"
+                placeholder="Contoh: 2">
+
+        </div>
+
+
+
+        <!-- HALAMAN -->
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+
+                Halaman
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="halaman"
+                name="halaman"
+                placeholder="Contoh: 100-110">
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row g-3 mt-1">
+
+
+        <!-- DOI -->
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+
+                DOI
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="doi"
+                name="doi"
+                placeholder="Contoh: 10.xxxx/xxxxx">
+
+        </div>
+
+
+
+        <!-- ISSN -->
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+
+                ISSN
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="issn"
+                name="issn"
+                placeholder="Contoh: 1234-5678">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ISBN -->
+
+    <div class="mt-3">
+
+        <label class="form-label">
+
+            ISBN
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="isbn"
+            name="isbn"
+            placeholder="Isi jika publikasi memiliki ISBN">
+
+    </div>
 
 </div>
+
+
+
+<!-- =========================================
+     3. LINK PUBLIKASI
+========================================= -->
+
+<div class="form-section">
+
+    <h5 class="form-section-title">
+
+        <i class="bi bi-link-45deg me-2"></i>
+
+        Tautan Publikasi
+
+    </h5>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Link Publikasi
+
+        </label>
+
+        <input
+            type="url"
+            class="form-control"
+            id="linkPublikasi"
+            name="linkPublikasi"
+            placeholder="https://...">
+
+    </div>
+
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Link PDF Google Drive
+
+        </label>
+
+        <input
+            type="url"
+            class="form-control"
+            id="linkPDFDrive"
+            name="linkPDFDrive"
+            placeholder="Link Google Drive PDF publikasi">
+
+        <div class="form-text">
+
+            Untuk sementara link PDF dimasukkan secara manual.
+            Fitur upload langsung ke Google Drive akan kita buat setelah modul utama selesai.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     4. ABSTRACT & METADATA
+========================================= -->
+
+<div class="form-section">
+
+    <h5 class="form-section-title">
+
+        <i class="bi bi-file-text me-2"></i>
+
+        Abstract & Metadata
+
+    </h5>
+
+
+    <!-- ABSTRACT -->
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Abstract
+
+        </label>
+
+        <textarea
+            class="form-control"
+            id="abstract"
+            name="abstract"
+            placeholder="Masukkan abstract publikasi"></textarea>
+
+    </div>
+
+
+
+    <!-- KEYWORDS -->
+
+    <div class="mb-3">
+
+        <label class="form-label">
+
+            Kata Kunci
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="kataKunci"
+            name="kataKunci"
+            placeholder="Contoh: epidemiologi, rumah sakit, infeksi">
+
+        <div class="form-text">
+
+            Pisahkan kata kunci menggunakan koma.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BAHASA -->
+
+    <div>
+
+        <label class="form-label">
+
+            Bahasa
+
+            <span class="required">*</span>
+
+        </label>
+
+        <select
+            class="form-select"
+            id="bahasa"
+            name="bahasa"
+            required>
+
+            <option value="">
+
+                Pilih bahasa
+
+            </option>
+
+            <option value="Indonesia">
+
+                Indonesia
+
+            </option>
+
+            <option value="Inggris">
+
+                Inggris
+
+            </option>
+
+            <option value="Lainnya">
+
+                Lainnya
+
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     5. INDEXING
+========================================= -->
+
+<div class="form-section">
+
+    <h5 class="form-section-title">
+
+        <i class="bi bi-award me-2"></i>
+
+        Indexing Publikasi
+
+    </h5>
+
+
+
+    <div class="row g-3">
+
+
+        <!-- INDEXING -->
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+
+                Indexing
+
+            </label>
+
+            <select
+                class="form-select"
+                id="indexing"
+                name="indexing">
+
+                <option value="">
+
+                    Pilih indexing
+
+                </option>
+
+                <!--
+                Akan diisi otomatis
+                dari 07_MASTER_INDEXING
+                -->
+
+            </select>
+
+        </div>
+
+
+
+        <!-- PERINGKAT -->
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+
+                Peringkat Index
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                id="peringkatIndex"
+                name="peringkatIndex"
+                placeholder="Contoh: Q1 / Q2 / S1 / S2">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- OPEN ACCESS -->
+
+    <div class="mt-4">
+
+        <label class="form-label d-block">
+
+            Status Open Access
+
+        </label>
+
+
+        <div class="form-check form-check-inline">
+
+            <input
+                class="form-check-input"
+                type="radio"
+                name="statusOpenAccess"
+                id="openAccessYa"
+                value="Ya">
+
+            <label
+                class="form-check-label"
+                for="openAccessYa">
+
+                Ya
+
+            </label>
+
+        </div>
+
+
+
+        <div class="form-check form-check-inline">
+
+            <input
+                class="form-check-input"
+                type="radio"
+                name="statusOpenAccess"
+                id="openAccessTidak"
+                value="Tidak"
+                checked>
+
+            <label
+                class="form-check-label"
+                for="openAccessTidak">
+
+                Tidak
+
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     6. AUTHOR
+========================================= -->
+
+<div class="form-section">
+
+    <h5 class="form-section-title">
+
+        <i class="bi bi-people me-2"></i>
+
+        Penulis / Author
+
+    </h5>
+
+
+    <p class="text-muted">
+
+        Tambahkan seluruh penulis publikasi.
+        Tandai penulis dari RSUP Surabaya dan corresponding author.
+
+    </p>
+
+
+
+    <!-- AUTHOR CONTAINER -->
+
+    <div id="authorContainer">
+
+
+        <!-- AUTHOR 1 -->
+
+        <div class="author-card author-item">
+
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <strong>
+
+                    Penulis 1
+
+                </strong>
+
+            </div>
+
+
+            <div class="row g-3">
+
+
+                <!-- NAMA -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Nama Author
+
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control author-name"
+                        name="authorName[]"
+                        placeholder="Nama lengkap author"
+                        required>
+
+                </div>
+
+
+
+                <!-- AFILIASI -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Afiliasi
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control author-affiliation"
+                        name="authorAffiliation[]"
+                        placeholder="Contoh: RSUP Surabaya">
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="mt-3">
+
+
+                <div class="form-check form-check-inline">
+
+                    <input
+                        class="form-check-input author-rsup"
+                        type="checkbox"
+                        name="authorRSUP[]">
+
+                    <label class="form-check-label">
+
+                        Author RSUP Surabaya
+
+                    </label>
+
+                </div>
+
+
+
+                <div class="form-check form-check-inline">
+
+                    <input
+                        class="form-check-input author-corresponding"
+                        type="checkbox"
+                        name="authorCorresponding[]">
+
+                    <label class="form-check-label">
+
+                        Corresponding Author
+
+                    </label>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ADD AUTHOR -->
+
+    <button
+        type="button"
+        class="btn btn-add-author"
+        id="addAuthorBtn">
+
+        <i class="bi bi-plus-circle me-1"></i>
+
+        Tambah Author
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================================
+     ACTION BUTTON
+========================================= -->
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+
+
+    <a
+        href="dashboard.html"
+        class="btn btn-outline-secondary">
+
+        <i class="bi bi-arrow-left me-1"></i>
+
+        Kembali
+
+    </a>
+
+
+
+    <div>
+
+
+        <button
+            type="reset"
+            class="btn btn-outline-secondary me-2">
+
+            Reset
+
+        </button>
+
+
+
+        <button
+            type="submit"
+            class="btn btn-kemenkes px-4">
+
+            <i class="bi bi-check-circle me-1"></i>
+
+            Simpan Publikasi
+
+        </button>
+
+
+    </div>
+
+</div>
+
 
 </form>
 
-</div>
 
 </div>
 
 </div>
 
-</div>
 
 </div>
 
+
+
+<!-- Bootstrap JS -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- JS Publikasi -->
 <script src="../js/add-publication.js"></script>
-  
+
+
 </body>
 
 </html>
