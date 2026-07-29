@@ -116,7 +116,21 @@ async function loadPublicationDetail() {
 // ==========================================
 
 function displayPublication(pub) {
+    
+// ==========================================
+// TOMBOL EDIT PUBLIKASI
+// ==========================================
 
+const editButton =
+    document.getElementById("editPublicationBtn");
+
+if (editButton && pub.PublikasiID) {
+
+    editButton.href =
+        "edit-publication.html?id=" +
+        encodeURIComponent(pub.PublikasiID);
+
+}
 
     // ==========================================
     // INFORMASI UTAMA
