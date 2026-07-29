@@ -29,7 +29,128 @@ document.addEventListener("DOMContentLoaded", function () {
     const authorContainer =
         document.getElementById("authorContainer");
 
+    // ==========================================
+    // LOAD MASTER DATA
+    // ==========================================
 
+    loadMasterData();
+
+
+    async function loadMasterData() {
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL + "?action=getMasterData"
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!result.status) {
+
+                console.error(
+                    "Gagal mengambil master data:",
+                    result.message
+                );
+
+                return;
+
+            }
+
+
+            // ==========================================
+            // JENIS PUBLIKASI
+            // ==========================================
+
+            const jenisSelect =
+                document.getElementById(
+                    "jenisPublikasi"
+                );
+
+
+            if (jenisSelect) {
+
+                result.jenisPublikasi.forEach(
+                    function (item) {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            item.id;
+
+
+                        option.textContent =
+                            item.nama;
+
+
+                        jenisSelect.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+            }
+
+
+            // ==========================================
+            // INDEXING
+            // ==========================================
+
+            const indexingSelect =
+                document.getElementById(
+                    "indexing"
+                );
+
+
+            if (indexingSelect) {
+
+                result.indexing.forEach(
+                    function (item) {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            item.id;
+
+
+                        option.textContent =
+                            item.nama;
+
+
+                        indexingSelect.appendChild(
+                            option
+                        );
+
+                    }
+                );
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Error load master data:",
+                error
+            );
+
+        }
+
+    }
+    
     // ==========================================
     // 1. TAMBAH AUTHOR
     // ==========================================
