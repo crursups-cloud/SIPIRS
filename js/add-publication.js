@@ -10,6 +10,97 @@
 const API_URL =
     "https://script.google.com/macros/s/AKfycbx_nglSPAgsqihJ3Xn_oIj8EComgbuAtXsJ7V14J4tycZR_osEHpCZeXo6iMK3H8_YJ/exec";
 
+// ==========================================
+// LOAD MASTER DATA
+// ==========================================
+
+async function loadMasterData() {
+
+    try {
+
+        const response = await fetch(
+            API_URL + "?action=getMasterData"
+        );
+
+        const result = await response.json();
+
+        console.log("Master Data:", result);
+
+
+        if (!result.status) {
+
+            console.error(
+                "Gagal mengambil master data:",
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        // ==========================================
+        // JENIS PUBLIKASI
+        // ==========================================
+
+        const jenisSelect =
+            document.getElementById("jenisPublikasi");
+
+
+        if (jenisSelect) {
+
+            result.jenisPublikasi.forEach(function(item) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = item.id;
+
+                option.textContent = item.nama;
+
+                jenisSelect.appendChild(option);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // INDEXING
+        // ==========================================
+
+        const indexingSelect =
+            document.getElementById("indexing");
+
+
+        if (indexingSelect) {
+
+            result.indexing.forEach(function(item) {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = item.id;
+
+                option.textContent = item.nama;
+
+                indexingSelect.appendChild(option);
+
+            });
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Error load master data:",
+            error
+        );
+
+    }
+
+}
 
 // ==========================================
 // DOM READY
@@ -17,6 +108,7 @@ const API_URL =
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    loadMasterData();
 
     const form =
         document.getElementById("publicationForm");
@@ -29,127 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const authorContainer =
         document.getElementById("authorContainer");
 
-    // ==========================================
-    // LOAD MASTER DATA
-    // ==========================================
-
-    loadMasterData();
-
-
-    async function loadMasterData() {
-
-        try {
-
-            const response =
-                await fetch(
-                    API_URL + "?action=getMasterData"
-                );
-
-
-            const result =
-                await response.json();
-
-
-            if (!result.status) {
-
-                console.error(
-                    "Gagal mengambil master data:",
-                    result.message
-                );
-
-                return;
-
-            }
-
-
-            // ==========================================
-            // JENIS PUBLIKASI
-            // ==========================================
-
-            const jenisSelect =
-                document.getElementById(
-                    "jenisPublikasi"
-                );
-
-
-            if (jenisSelect) {
-
-                result.jenisPublikasi.forEach(
-                    function (item) {
-
-                        const option =
-                            document.createElement(
-                                "option"
-                            );
-
-
-                        option.value =
-                            item.id;
-
-
-                        option.textContent =
-                            item.nama;
-
-
-                        jenisSelect.appendChild(
-                            option
-                        );
-
-                    }
-                );
-
-            }
-
-
-            // ==========================================
-            // INDEXING
-            // ==========================================
-
-            const indexingSelect =
-                document.getElementById(
-                    "indexing"
-                );
-
-
-            if (indexingSelect) {
-
-                result.indexing.forEach(
-                    function (item) {
-
-                        const option =
-                            document.createElement(
-                                "option"
-                            );
-
-
-                        option.value =
-                            item.id;
-
-
-                        option.textContent =
-                            item.nama;
-
-
-                        indexingSelect.appendChild(
-                            option
-                        );
-
-                    }
-                );
-
-            }
-
-
-        } catch (error) {
-
-            console.error(
-                "Error load master data:",
-                error
-            );
-
-        }
-
-    }
+    
     
     // ==========================================
     // 1. TAMBAH AUTHOR
