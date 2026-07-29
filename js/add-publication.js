@@ -2,11 +2,32 @@
 // SIPIRS - ADD PUBLICATION
 // ==========================================
 
+
+// ==========================================
+// URL GOOGLE APPS SCRIPT
+// ==========================================
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx_nglSPAgsqihJ3Xn_oIj8EComgbuAtXsJ7V14J4tycZR_osEHpCZeXo6iMK3H8_YJ/exec";
+
+
+// ==========================================
+// DOM READY
+// ==========================================
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const addAuthorBtn = document.getElementById("addAuthorBtn");
-    const authorContainer = document.getElementById("authorContainer");
-    const form = document.getElementById("publicationForm");
+
+    const form =
+        document.getElementById("publicationForm");
+
+
+    const addAuthorBtn =
+        document.getElementById("addAuthorBtn");
+
+
+    const authorContainer =
+        document.getElementById("authorContainer");
 
 
     // ==========================================
@@ -17,13 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         addAuthorBtn.addEventListener("click", function () {
 
+
             const authorCount =
-                authorContainer.querySelectorAll(".author-item").length + 1;
+                authorContainer
+                    .querySelectorAll(".author-item")
+                    .length + 1;
 
 
-            const authorCard = document.createElement("div");
+            const authorCard =
+                document.createElement("div");
 
-            authorCard.className = "author-card author-item";
+
+            authorCard.className =
+                "author-card author-item";
 
 
             authorCard.innerHTML = `
@@ -48,8 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="row g-3">
 
-                    <!-- NAMA AUTHOR -->
-
                     <div class="col-md-6">
 
                         <label class="form-label">
@@ -68,8 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>
 
-
-                    <!-- AFILIASI -->
 
                     <div class="col-md-6">
 
@@ -92,8 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="mt-3">
 
-                    <!-- AUTHOR RSUP -->
-
                     <div class="form-check form-check-inline">
 
                         <input
@@ -109,8 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>
 
-
-                    <!-- CORRESPONDING AUTHOR -->
 
                     <div class="form-check form-check-inline">
 
@@ -135,22 +154,24 @@ document.addEventListener("DOMContentLoaded", function () {
             authorContainer.appendChild(authorCard);
 
 
-            // ==========================================
-            // TOMBOL HAPUS
-            // ==========================================
+            // Tombol hapus
 
             const removeButton =
-                authorCard.querySelector(".remove-author");
+                authorCard.querySelector(
+                    ".remove-author"
+                );
 
 
-            removeButton.addEventListener("click", function () {
+            removeButton.addEventListener(
+                "click",
+                function () {
 
-                authorCard.remove();
+                    authorCard.remove();
 
-                updateAuthorNumbers();
+                    updateAuthorNumbers();
 
-            });
-
+                }
+            );
 
         });
 
@@ -163,24 +184,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updateAuthorNumbers() {
 
+
         const authors =
-            document.querySelectorAll(".author-item");
+            authorContainer.querySelectorAll(
+                ".author-item"
+            );
 
 
-        authors.forEach(function (author, index) {
-
-            const title =
-                author.querySelector("strong");
+        authors.forEach(
+            function (author, index) {
 
 
-            if (title) {
+                const title =
+                    author.querySelector("strong");
 
-                title.textContent =
-                    "Penulis " + (index + 1);
+
+                if (title) {
+
+                    title.textContent =
+                        "Penulis " + (index + 1);
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -191,16 +218,368 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (form) {
 
-        form.addEventListener("submit", function (event) {
 
-            event.preventDefault();
+        form.addEventListener(
+            "submit",
+            async function (event) {
 
 
-            alert(
-                "Form berhasil dibaca. Berikutnya kita akan menghubungkannya ke Google Apps Script."
-            );
+                event.preventDefault();
 
-        });
+
+                // ------------------------------------------
+                // VALIDASI
+                // ------------------------------------------
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+                // ------------------------------------------
+                // TOMBOL SIMPAN
+                // ------------------------------------------
+
+                const submitButton =
+                    form.querySelector(
+                        'button[type="submit"]'
+                    );
+
+
+                const originalButton =
+                    submitButton.innerHTML;
+
+
+                submitButton.disabled = true;
+
+
+                submitButton.innerHTML = `
+
+                    <span
+                        class="spinner-border spinner-border-sm me-2">
+                    </span>
+
+                    Menyimpan...
+
+                `;
+
+
+                try {
+
+
+                    // ==========================================
+                    // AMBIL DATA AUTHOR
+                    // ==========================================
+
+                    const authors = [];
+
+
+                    const authorItems =
+                        authorContainer.querySelectorAll(
+                            ".author-item"
+                        );
+
+
+                    authorItems.forEach(
+                        function (authorItem) {
+
+
+                            const name =
+                                authorItem
+                                    .querySelector(
+                                        ".author-name"
+                                    )
+                                    .value
+                                    .trim();
+
+
+                            const affiliation =
+                                authorItem
+                                    .querySelector(
+                                        ".author-affiliation"
+                                    )
+                                    .value
+                                    .trim();
+
+
+                            const isRSUP =
+                                authorItem
+                                    .querySelector(
+                                        ".author-rsup"
+                                    )
+                                    .checked;
+
+
+                            const isCorresponding =
+                                authorItem
+                                    .querySelector(
+                                        ".author-corresponding"
+                                    )
+                                    .checked;
+
+
+                            authors.push({
+
+                                name:
+                                    name,
+
+                                affiliation:
+                                    affiliation,
+
+                                isRSUP:
+                                    isRSUP,
+
+                                isCorresponding:
+                                    isCorresponding
+
+                            });
+
+                        }
+                    );
+
+
+                    // ==========================================
+                    // DATA PUBLIKASI
+                    // ==========================================
+
+                    const data = {
+
+                        action:
+                            "addPublication",
+
+
+                        InputByUserID:
+                            localStorage.getItem(
+                                "userID"
+                            ) || "",
+
+
+                        Judul:
+                            document
+                                .getElementById("judul")
+                                .value
+                                .trim(),
+
+
+                        JenisPublikasiID:
+                            document
+                                .getElementById(
+                                    "jenisPublikasi"
+                                )
+                                .value,
+
+
+                        NamaJurnalPenerbit:
+                            document
+                                .getElementById(
+                                    "namaJurnalPenerbit"
+                                )
+                                .value
+                                .trim(),
+
+
+                        Volume:
+                            document
+                                .getElementById("volume")
+                                .value
+                                .trim(),
+
+
+                        Issue:
+                            document
+                                .getElementById("issue")
+                                .value
+                                .trim(),
+
+
+                        Halaman:
+                            document
+                                .getElementById("halaman")
+                                .value
+                                .trim(),
+
+
+                        TahunTerbit:
+                            document
+                                .getElementById("tahunTerbit")
+                                .value,
+
+
+                        DOI:
+                            document
+                                .getElementById("doi")
+                                .value
+                                .trim(),
+
+
+                        ISSN:
+                            document
+                                .getElementById("issn")
+                                .value
+                                .trim(),
+
+
+                        ISBN:
+                            document
+                                .getElementById("isbn")
+                                .value
+                                .trim(),
+
+
+                        LinkPublikasi:
+                            document
+                                .getElementById(
+                                    "linkPublikasi"
+                                )
+                                .value
+                                .trim(),
+
+
+                        LinkPDFDrive:
+                            document
+                                .getElementById(
+                                    "linkPDFDrive"
+                                )
+                                .value
+                                .trim(),
+
+
+                        Abstract:
+                            document
+                                .getElementById("abstract")
+                                .value
+                                .trim(),
+
+
+                        KataKunci:
+                            document
+                                .getElementById("kataKunci")
+                                .value
+                                .trim(),
+
+
+                        Bahasa:
+                            document
+                                .getElementById("bahasa")
+                                .value,
+
+
+                        IndexingID:
+                            document
+                                .getElementById("indexing")
+                                .value,
+
+
+                        PeringkatIndex:
+                            document
+                                .getElementById(
+                                    "peringkatIndex"
+                                )
+                                .value
+                                .trim(),
+
+
+                        StatusVerifikasiID:
+                            "",
+
+
+                        StatusOpenAccess:
+                            document.querySelector(
+                                'input[name="statusOpenAccess"]:checked'
+                            )?.value || "",
+
+
+                        authors:
+                            authors
+
+                    };
+
+
+                    // ==========================================
+                    // KIRIM KE APPS SCRIPT
+                    // ==========================================
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+
+                                method:
+                                    "POST",
+
+                                body:
+                                    JSON.stringify(data)
+
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    // ==========================================
+                    // HASIL
+                    // ==========================================
+
+                    if (result.status) {
+
+
+                        alert(
+                            "Publikasi berhasil disimpan!\n\n" +
+                            "ID Publikasi: " +
+                            result.PublikasiID
+                        );
+
+
+                        window.location.href =
+                            "dashboard.html";
+
+
+                    } else {
+
+
+                        alert(
+                            "Publikasi gagal disimpan.\n\n" +
+                            result.message
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "SIPIRS Error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Terjadi kesalahan saat menghubungkan ke server.\n\n" +
+                        error.message
+                    );
+
+
+                } finally {
+
+
+                    submitButton.disabled =
+                        false;
+
+
+                    submitButton.innerHTML =
+                        originalButton;
+
+                }
+
+            }
+        );
 
     }
 
