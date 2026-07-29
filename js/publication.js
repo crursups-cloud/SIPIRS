@@ -473,7 +473,7 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-
+        console.log("DOM READY");
         loadPublications();
 
 
@@ -526,3 +526,4 @@ document.addEventListener(
 
     }
 );
+console.log("PUBLICATION.JS BERHASIL DIMUAT");
