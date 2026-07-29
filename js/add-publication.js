@@ -363,21 +363,27 @@ document.addEventListener("DOMContentLoaded", function () {
                                 .getElementById("judul")
                                 .value
                                 .trim(),
-
+                        
+                        // ==========================================
+                        // JENIS PUBLIKASI
+                        // ==========================================
 
                         JenisPublikasiID:
                             document
-                                .getElementById(
-                                    "jenisPublikasi"
-                                )
+                                .getElementById("jenisPublikasi")
                                 .value,
+                        
+                        NamaJenisPublikasi:
+                            document
+                                .getElementById("jenisPublikasi")
+                                .selectedOptions[0]
+                                .textContent
+                                .trim(),
 
 
                         NamaJurnalPenerbit:
                             document
-                                .getElementById(
-                                    "namaJurnalPenerbit"
-                                )
+                                .getElementById("namaJurnalPenerbit")
                                 .value
                                 .trim(),
 
@@ -432,18 +438,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         LinkPublikasi:
                             document
-                                .getElementById(
-                                    "linkPublikasi"
-                                )
+                                .getElementById("linkPublikasi")
                                 .value
                                 .trim(),
 
 
                         LinkPDFDrive:
                             document
-                                .getElementById(
-                                    "linkPDFDrive"
-                                )
+                                .getElementById("linkPDFDrive")
                                 .value
                                 .trim(),
 
@@ -472,13 +474,17 @@ document.addEventListener("DOMContentLoaded", function () {
                             document
                                 .getElementById("indexing")
                                 .value,
-
+                        
+                        NamaIndexing:
+                            document
+                                .getElementById("indexing")
+                                .selectedOptions[0]
+                                .textContent
+                                .trim(),
 
                         PeringkatIndex:
                             document
-                                .getElementById(
-                                    "peringkatIndex"
-                                )
+                                .getElementById("peringkatIndex")
                                 .value
                                 .trim(),
 
