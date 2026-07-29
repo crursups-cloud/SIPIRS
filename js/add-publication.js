@@ -2,135 +2,128 @@
 // SIPIRS - ADD PUBLICATION
 // ==========================================
 
-
-// ==========================================
-// 1. TAMBAH & HAPUS AUTHOR
-// ==========================================
-
 document.addEventListener("DOMContentLoaded", function () {
 
-    const addAuthorBtn =
-        document.getElementById("addAuthorBtn");
-
-    const authorContainer =
-        document.getElementById("authorContainer");
+    const addAuthorBtn = document.getElementById("addAuthorBtn");
+    const authorContainer = document.getElementById("authorContainer");
+    const form = document.getElementById("publicationForm");
 
 
     // ==========================================
-    // TAMBAH AUTHOR
+    // 1. TAMBAH AUTHOR
     // ==========================================
 
     if (addAuthorBtn && authorContainer) {
 
         addAuthorBtn.addEventListener("click", function () {
 
-            // Hitung jumlah author yang sudah ada
             const authorCount =
                 authorContainer.querySelectorAll(".author-item").length + 1;
 
 
-            const authorHTML = `
+            const authorCard = document.createElement("div");
 
-                <div class="author-card author-item">
-
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-
-                        <strong>
-                            Penulis ${authorCount}
-                        </strong>
-
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-outline-danger remove-author">
-
-                            <i class="bi bi-trash"></i>
-                            Hapus
-
-                        </button>
-
-                    </div>
+            authorCard.className = "author-card author-item";
 
 
-                    <div class="row g-3">
+            authorCard.innerHTML = `
 
-                        <!-- NAMA AUTHOR -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
 
-                        <div class="col-md-6">
+                    <strong>
+                        Penulis ${authorCount}
+                    </strong>
 
-                            <label class="form-label">
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline-danger remove-author">
 
-                                Nama Author
-                                <span class="required">*</span>
+                        <i class="bi bi-trash"></i>
+                        Hapus
 
-                            </label>
+                    </button>
 
-                            <input
-                                type="text"
-                                class="form-control author-name"
-                                name="authorName[]"
-                                placeholder="Nama lengkap author"
-                                required>
-
-                        </div>
+                </div>
 
 
-                        <!-- AFILIASI -->
+                <div class="row g-3">
 
-                        <div class="col-md-6">
+                    <!-- NAMA AUTHOR -->
 
-                            <label class="form-label">
+                    <div class="col-md-6">
 
-                                Afiliasi
+                        <label class="form-label">
 
-                            </label>
+                            Nama Author
+                            <span class="required">*</span>
 
-                            <input
-                                type="text"
-                                class="form-control author-affiliation"
-                                name="authorAffiliation[]"
-                                placeholder="Contoh: RSUP Surabaya">
+                        </label>
 
-                        </div>
+                        <input
+                            type="text"
+                            class="form-control author-name"
+                            name="authorName[]"
+                            placeholder="Nama lengkap author"
+                            required>
 
                     </div>
 
 
-                    <div class="mt-3">
+                    <!-- AFILIASI -->
 
-                        <!-- AUTHOR RSUP -->
+                    <div class="col-md-6">
 
-                        <div class="form-check form-check-inline">
+                        <label class="form-label">
 
-                            <input
-                                class="form-check-input author-rsup"
-                                type="checkbox"
-                                name="authorRSUP[]">
+                            Afiliasi
 
-                            <label class="form-check-label">
+                        </label>
 
-                                Author RSUP Surabaya
+                        <input
+                            type="text"
+                            class="form-control author-affiliation"
+                            name="authorAffiliation[]"
+                            placeholder="Contoh: RSUP Surabaya">
 
-                            </label>
+                    </div>
 
-                        </div>
+                </div>
 
 
-                        <!-- CORRESPONDING AUTHOR -->
+                <div class="mt-3">
 
-                        <div class="form-check form-check-inline">
+                    <!-- AUTHOR RSUP -->
 
-                            <input
-                                class="form-check-input author-corresponding"
-                                type="checkbox"
-                                name="authorCorresponding[]">
+                    <div class="form-check form-check-inline">
 
-                            <label class="form-check-label">
+                        <input
+                            class="form-check-input author-rsup"
+                            type="checkbox"
+                            name="authorRSUP[]">
 
-                                Corresponding Author
+                        <label class="form-check-label">
 
-                            </label>
+                            Author RSUP Surabaya
 
-                        </div>
+                        </label>
+
+                    </div>
+
+
+                    <!-- CORRESPONDING AUTHOR -->
+
+                    <div class="form-check form-check-inline">
+
+                        <input
+                            class="form-check-input author-corresponding"
+                            type="checkbox"
+                            name="authorCorresponding[]">
+
+                        <label class="form-check-label">
+
+                            Corresponding Author
+
+                        </label>
 
                     </div>
 
@@ -139,14 +132,25 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
 
 
-            authorContainer.insertAdjacentHTML(
-                "beforeend",
-                authorHTML
-            );
+            authorContainer.appendChild(authorCard);
 
 
-            // Rapikan nomor author
-            updateAuthorNumbers();
+            // ==========================================
+            // TOMBOL HAPUS
+            // ==========================================
+
+            const removeButton =
+                authorCard.querySelector(".remove-author");
+
+
+            removeButton.addEventListener("click", function () {
+
+                authorCard.remove();
+
+                updateAuthorNumbers();
+
+            });
+
 
         });
 
@@ -154,36 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // HAPUS AUTHOR
-    // ==========================================
-
-    document.addEventListener("click", function (event) {
-
-        const removeButton =
-            event.target.closest(".remove-author");
-
-
-        if (removeButton) {
-
-            const authorCard =
-                removeButton.closest(".author-item");
-
-
-            if (authorCard) {
-
-                authorCard.remove();
-
-                updateAuthorNumbers();
-
-            }
-
-        }
-
-    });
-
-
-    // ==========================================
-    // UPDATE NOMOR AUTHOR
+    // 2. UPDATE NOMOR AUTHOR
     // ==========================================
 
     function updateAuthorNumbers() {
@@ -211,12 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
-    // 2. SUBMIT FORM
+    // 3. SUBMIT FORM
     // ==========================================
-
-    const form =
-        document.getElementById("publicationForm");
-
 
     if (form) {
 
