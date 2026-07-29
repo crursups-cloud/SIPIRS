@@ -432,11 +432,11 @@ function filterPublications() {
 
 function viewPublication(publicationId) {
 
-    alert(
-        "Detail publikasi: " +
-        publicationId +
-        "\n\nFitur detail publikasi akan kita buat pada tahap berikutnya."
-    );
+    window.location.href =
+        "publication-detail.html?id=" +
+        encodeURIComponent(
+            publicationId
+        );
 
 }
 
