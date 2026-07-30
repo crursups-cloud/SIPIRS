@@ -67,10 +67,8 @@ async function loadPublication(){
     try{
 
         const response=
-        await fetch(
-
-            API_URL+
-            "?action=getPublicationByID&id="+
+        await fetch(API_URL+
+            "?action=getPublicationDetail"+
             publicationID
 
         );
