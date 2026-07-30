@@ -636,7 +636,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                         window.location.href =
-                            "dashboard.html";
+                            "publication-detail.html?id=" +
+                            result.PublikasiID;
 
 
                     } else {
