@@ -181,3 +181,77 @@ document.addEventListener(
     }
 
 );
+
+async function updatePublication(e){
+
+    e.preventDefault();
+
+    const data = {
+
+        action: "updatePublication",
+
+        PublikasiID: publicationID,
+
+        Judul: document.getElementById("judul").value,
+
+        JenisPublikasiID: document.getElementById("jenisPublikasi").value,
+
+        NamaJurnalPenerbit: document.getElementById("namaJurnalPenerbit").value,
+
+        Volume: document.getElementById("volume").value,
+
+        Issue: document.getElementById("issue").value,
+
+        Halaman: document.getElementById("halaman").value,
+
+        TahunTerbit: document.getElementById("tahunTerbit").value,
+
+        DOI: document.getElementById("doi").value,
+
+        ISSN: document.getElementById("issn").value,
+
+        ISBN: document.getElementById("isbn").value,
+
+        LinkPublikasi: document.getElementById("linkPublikasi").value,
+
+        LinkPDFDrive: document.getElementById("linkPDFDrive").value,
+
+        Abstract: document.getElementById("abstract").value,
+
+        KataKunci: document.getElementById("kataKunci").value,
+
+        Bahasa: document.getElementById("bahasa").value,
+
+        IndexingID: document.getElementById("indexing").value,
+
+        PeringkatIndex: document.getElementById("peringkatIndex").value,
+
+        StatusOpenAccess:
+            document.getElementById("openAccessYa").checked
+            ? "Ya"
+            : "Tidak",
+
+        authors: []
+
+    };
+
+    const response = await fetch(API_URL,{
+        method:"POST",
+        body:JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    alert(result.message);
+
+    if(result.status){
+
+        window.location.href =
+        "publication-detail.html?id=" + publicationID;
+
+    }
+
+}
+document
+.getElementById("publicationForm")
+.addEventListener("submit", updatePublication);
