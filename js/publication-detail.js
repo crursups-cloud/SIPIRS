@@ -694,3 +694,20 @@ document.addEventListener(
 
     }
 );
+document
+.getElementById("deletePublicationBtn")
+.addEventListener("click",function(){
+
+document
+.getElementById("deleteTitle")
+.textContent=
+pub.Judul;
+
+const modal=
+new bootstrap.Modal(
+document.getElementById("deleteModal")
+);
+
+modal.show();
+
+});
