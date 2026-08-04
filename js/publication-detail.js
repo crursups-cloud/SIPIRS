@@ -757,3 +757,23 @@ document
     }
 
 };
+const deleteButton =
+    document.getElementById("deletePublicationBtn");
+
+if(deleteButton){
+
+    deleteButton.addEventListener("click",function(){
+
+        document.getElementById("deleteTitle").textContent =
+            pub.Judul;
+
+        const modal =
+            new bootstrap.Modal(
+                document.getElementById("deleteModal")
+            );
+
+        modal.show();
+
+    });
+
+}
