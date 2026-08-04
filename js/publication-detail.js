@@ -711,3 +711,49 @@ document.getElementById("deleteModal")
 modal.show();
 
 });
+document
+.getElementById("confirmDeleteBtn")
+.onclick = async function(){
+
+    try{
+
+        const response =
+        await fetch(
+
+            API_URL +
+
+            "?action=deletePublication&id=" +
+
+            encodeURIComponent(pub.PublikasiID)
+
+        );
+
+        const result =
+        await response.json();
+
+        if(result.status){
+
+            alert("Publikasi berhasil dihapus.");
+
+            window.location.href =
+            "publication.html";
+
+        }
+
+        else{
+
+            alert(result.message);
+
+        }
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        alert("Terjadi kesalahan.");
+
+    }
+
+};
