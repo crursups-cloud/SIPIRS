@@ -324,7 +324,6 @@ rel="stylesheet">
 
     </a>
 
-
     <a
         id="editPublicationBtn"
         href="#"
@@ -336,6 +335,16 @@ rel="stylesheet">
 
     </a>
 
+   <button
+    id="deletePublicationBtn"
+    class="btn btn-danger">
+
+    <i class="bi bi-trash"></i>
+
+    Hapus Publikasi
+
+   </button>
+   
 </div>
 
 
@@ -922,7 +931,74 @@ src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.j
 
 <script src="../js/publication-detail.js"></script>
 
+<div
+class="modal fade"
+id="deleteModal"
+tabindex="-1">
 
+<div class="modal-dialog">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Hapus Publikasi
+
+</h5>
+
+<button
+class="btn-close"
+data-bs-dismiss="modal">
+</button>
+
+</div>
+
+<div class="modal-body">
+
+<p>
+
+Yakin ingin menghapus publikasi ini?
+
+</p>
+
+<p class="fw-bold" id="deleteTitle"></p>
+
+<div class="alert alert-warning">
+
+Semua data author juga akan dihapus.
+
+</div>
+
+</div>
+
+<div class="modal-footer">
+
+<button
+class="btn btn-secondary"
+data-bs-dismiss="modal">
+
+Batal
+
+</button>
+
+<button
+id="confirmDeleteBtn"
+class="btn btn-danger">
+
+Ya, Hapus
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+   
 </body>
 
 </html>
