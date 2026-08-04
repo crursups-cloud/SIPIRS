@@ -255,3 +255,13 @@ async function updatePublication(e){
 document
 .getElementById("publicationForm")
 .addEventListener("submit", updatePublication);
+
+document
+.getElementById("btnCancel")
+.addEventListener("click", function(){
+
+    window.location.href =
+        "publication-detail.html?id=" +
+        publicationID;
+
+});
