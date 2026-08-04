@@ -292,7 +292,156 @@ if (editButton && pub.PublikasiID) {
     renderAuthors(
         pub.authors || []
     );
+    document
+.getElementById("deletePublicationBtn")
+.addEventListener("click",function(){
 
+document
+.getElementById("deleteTitle")
+.textContent=
+pub.Judul;
+
+const modal=
+new bootstrap.Modal(
+document.getElementById("deleteModal")
+);
+
+modal.show();
+
+});
+document
+.getElementById("confirmDeleteBtn")
+.onclick = async function(){
+
+    try{
+
+        const response =
+        await fetch(
+
+            API_URL +
+
+            "?action=deletePublication&id=" +
+
+            encodeURIComponent(pub.PublikasiID)
+
+        );
+
+        const result =
+        await response.json();
+
+        if(result.status){
+
+            alert("Publikasi berhasil dihapus.");
+
+            window.location.href =
+            "publication.html";
+
+        }
+
+        else{
+
+            alert(result.message);
+
+        }
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+        alert("Terjadi kesalahan.");
+
+    }
+
+};
+const deleteButton =
+    document.getElementById("deletePublicationBtn");
+
+if(deleteButton){
+
+    deleteButton.addEventListener("click",function(){
+
+        document.getElementById("deleteTitle").textContent =
+            pub.Judul;
+
+        const modal =
+            new bootstrap.Modal(
+                document.getElementById("deleteModal")
+            );
+
+        modal.show();
+
+    });
+
+// ==========================================
+// DELETE PUBLIKASI
+// ==========================================
+
+const deleteButton =
+    document.getElementById("deletePublicationBtn");
+
+if (deleteButton) {
+
+    deleteButton.onclick = function () {
+
+        document.getElementById("deleteTitle").textContent =
+            pub.Judul;
+
+        const modal =
+            new bootstrap.Modal(
+                document.getElementById("deleteModal")
+            );
+
+        modal.show();
+
+    };
+
+}
+
+const confirmButton =
+    document.getElementById("confirmDeleteBtn");
+
+if (confirmButton) {
+
+    confirmButton.onclick = async function () {
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "?action=deletePublication&id=" +
+                    encodeURIComponent(pub.PublikasiID)
+                );
+
+            const result =
+                await response.json();
+
+            if (result.status) {
+
+                alert("Publikasi berhasil dihapus.");
+
+                window.location.href =
+                    "publication.html";
+
+            } else {
+
+                alert(result.message);
+
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+            alert("Terjadi kesalahan.");
+
+        }
+
+    };
+
+}
 
     // ==========================================
     // SHOW
