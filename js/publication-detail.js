@@ -289,109 +289,26 @@ if (editButton && pub.PublikasiID) {
     // AUTHOR
     // ==========================================
 
-    renderAuthors(
-        pub.authors || []
-    );
-    document
-.getElementById("deletePublicationBtn")
-.addEventListener("click",function(){
+    renderAuthors(pub.authors || []);
+    
+    // ==========================================
+    // DELETE PUBLIKASI
+    // ==========================================
 
-document
-.getElementById("deleteTitle")
-.textContent=
-pub.Judul;
-
-const modal=
-new bootstrap.Modal(
-document.getElementById("deleteModal")
-);
-
-modal.show();
-
-});
-document
-.getElementById("confirmDeleteBtn")
-.onclick = async function(){
-
-    try{
-
-        const response =
-        await fetch(
-
-            API_URL +
-
-            "?action=deletePublication&id=" +
-
-            encodeURIComponent(pub.PublikasiID)
-
-        );
-
-        const result =
-        await response.json();
-
-        if(result.status){
-
-            alert("Publikasi berhasil dihapus.");
-
-            window.location.href =
-            "publication.html";
-
-        }
-
-        else{
-
-            alert(result.message);
-
-        }
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Terjadi kesalahan.");
-
-    }
-
-};
 const deleteButton =
-    document.getElementById("deletePublicationBtn");
+document.getElementById("deletePublicationBtn");
 
 if(deleteButton){
 
-    deleteButton.addEventListener("click",function(){
+    deleteButton.onclick = function(){
 
         document.getElementById("deleteTitle").textContent =
-            pub.Judul;
+        pub.Judul;
 
         const modal =
-            new bootstrap.Modal(
-                document.getElementById("deleteModal")
-            );
-
-        modal.show();
-
-    });
-
-// ==========================================
-// DELETE PUBLIKASI
-// ==========================================
-
-const deleteButton =
-    document.getElementById("deletePublicationBtn");
-
-if (deleteButton) {
-
-    deleteButton.onclick = function () {
-
-        document.getElementById("deleteTitle").textContent =
-            pub.Judul;
-
-        const modal =
-            new bootstrap.Modal(
-                document.getElementById("deleteModal")
-            );
+        new bootstrap.Modal(
+            document.getElementById("deleteModal")
+        );
 
         modal.show();
 
@@ -400,38 +317,38 @@ if (deleteButton) {
 }
 
 const confirmButton =
-    document.getElementById("confirmDeleteBtn");
+document.getElementById("confirmDeleteBtn");
 
-if (confirmButton) {
+if(confirmButton){
 
-    confirmButton.onclick = async function () {
+    confirmButton.onclick = async function(){
 
-        try {
+        try{
 
             const response =
-                await fetch(
-                    API_URL +
-                    "?action=deletePublication&id=" +
-                    encodeURIComponent(pub.PublikasiID)
-                );
+            await fetch(
+                API_URL +
+                "?action=deletePublication&id=" +
+                encodeURIComponent(pub.PublikasiID)
+            );
 
             const result =
-                await response.json();
+            await response.json();
 
-            if (result.status) {
+            if(result.status){
 
                 alert("Publikasi berhasil dihapus.");
 
                 window.location.href =
-                    "publication.html";
+                "publication.html";
 
-            } else {
+            }else{
 
                 alert(result.message);
 
             }
 
-        } catch (err) {
+        }catch(err){
 
             console.error(err);
 
@@ -442,23 +359,19 @@ if (confirmButton) {
     };
 
 }
+    
 
     // ==========================================
     // SHOW
     // ==========================================
 
     document
-        .getElementById(
-            "loadingDetail"
-        )
+        .getElementById("loadingDetail")
         .classList
         .add("d-none");
 
-
     document
-        .getElementById(
-            "detailContainer"
-        )
+        .getElementById("detailContainer")
         .classList
         .remove("d-none");
 
@@ -473,18 +386,13 @@ function renderAuthors(authors) {
 
 
     const container =
-        document.getElementById(
-            "authorContainer"
-        );
-
+        document.getElementById("authorContainer");
 
     if (!container) return;
 
 
-    if (
-        !authors ||
-        authors.length === 0
-    ) {
+    if (!authors ||
+        authors.length === 0) {
 
         container.innerHTML = `
 
@@ -500,9 +408,7 @@ function renderAuthors(authors) {
 
     }
 
-
     container.innerHTML = "";
-
 
     authors.forEach(
         function(author, index) {
@@ -514,8 +420,7 @@ function renderAuthors(authors) {
                 );
 
 
-            card.className =
-                "author-card";
+            card.className ="author-card";
 
 
             card.innerHTML = `
@@ -596,9 +501,7 @@ function renderAuthors(authors) {
             `;
 
 
-            container.appendChild(
-                card
-            );
+            container.appendChild(card);
 
         }
     );
@@ -843,86 +746,3 @@ document.addEventListener(
 
     }
 );
-document
-.getElementById("deletePublicationBtn")
-.addEventListener("click",function(){
-
-document
-.getElementById("deleteTitle")
-.textContent=
-pub.Judul;
-
-const modal=
-new bootstrap.Modal(
-document.getElementById("deleteModal")
-);
-
-modal.show();
-
-});
-document
-.getElementById("confirmDeleteBtn")
-.onclick = async function(){
-
-    try{
-
-        const response =
-        await fetch(
-
-            API_URL +
-
-            "?action=deletePublication&id=" +
-
-            encodeURIComponent(pub.PublikasiID)
-
-        );
-
-        const result =
-        await response.json();
-
-        if(result.status){
-
-            alert("Publikasi berhasil dihapus.");
-
-            window.location.href =
-            "publication.html";
-
-        }
-
-        else{
-
-            alert(result.message);
-
-        }
-
-    }
-
-    catch(err){
-
-        console.log(err);
-
-        alert("Terjadi kesalahan.");
-
-    }
-
-};
-const deleteButton =
-    document.getElementById("deletePublicationBtn");
-
-if(deleteButton){
-
-    deleteButton.addEventListener("click",function(){
-
-        document.getElementById("deleteTitle").textContent =
-            pub.Judul;
-
-        const modal =
-            new bootstrap.Modal(
-                document.getElementById("deleteModal")
-            );
-
-        modal.show();
-
-    });
-
-}
