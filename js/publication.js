@@ -40,8 +40,7 @@ async function loadPublications() {
             );
 
 
-        const result =
-            await response.json();
+        const result = await response.json();
 
 
         console.log("Publication Data:", result);
@@ -51,10 +50,17 @@ async function loadPublications() {
 
             tableBody.innerHTML = `
                 <tr>
-                    <td colspan="8"
-                        class="text-center text-danger py-5">
+                    <td colspan="8" class="text-center py-5">
+                    
+                        <i class="bi bi-folder2-open fs-1 text-secondary d-block mb-3"></i>
 
-                        Gagal mengambil data publikasi.
+                        <h5 class="mb-2">
+                            Tidak ada data ditemukan
+                        </h5>
+
+                        <div class="text-muted">
+                            Belum ada publikasi yang tersimpan di SIPIRS.
+                        </div>
 
                     </td>
                 </tr>
