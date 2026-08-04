@@ -362,7 +362,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 try {
+                    // ==========================================
+                    // UPLOAD PDF KE GOOGLE DRIVE
+                    // ==========================================
 
+                    const pdfURL = await uploadPDF();
 
                     // ==========================================
                     // AMBIL DATA AUTHOR
@@ -535,14 +539,9 @@ document.addEventListener("DOMContentLoaded", function () {
                                 .value
                                 .trim(),
 
-
                         LinkPDFDrive:
-                            document
-                                .getElementById("linkPDFDrive")
-                                .value
-                                .trim(),
-
-
+                            pdfURL,
+                        
                         Abstract:
                             document
                                 .getElementById("abstract")
@@ -668,10 +667,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 } finally {
 
-
                     submitButton.disabled =
                         false;
-
 
                     submitButton.innerHTML =
                         originalButton;
@@ -684,3 +681,103 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+async function uploadPDF(){
+
+    const file =
+    document
+    .getElementById("pdfFile")
+    .files[0];
+
+    if(!file){
+
+        return "";
+
+    }
+
+    const base64 =
+    await fileToBase64(file);
+
+    const formData =
+    new FormData();
+
+    formData.append(
+        "action",
+        "uploadPDF"
+    );
+
+    formData.append(
+        "filename",
+        file.name
+    );
+
+    formData.append(
+        "file",
+        base64
+    );
+
+    const response =
+    await fetch(
+
+        API_URL,
+
+        {
+
+            method:"POST",
+
+            body:formData
+
+        }
+
+    );
+
+    const result =
+    await response.json();
+
+    if(result.status){
+
+        document
+        .getElementById(
+            "uploadStatus"
+        )
+        .innerHTML =
+        "✅ PDF berhasil diupload";
+
+        return result.url;
+
+    }
+
+    alert(result.message);
+
+    return "";
+
+}
+function fileToBase64(file){
+
+    return new Promise(
+
+        function(resolve){
+
+            const reader =
+            new FileReader();
+
+            reader.onload=function(){
+
+                resolve(
+
+                    reader.result
+
+                    .split(",")
+
+                    [1]
+
+                );
+
+            };
+
+            reader.readAsDataURL(file);
+
+        }
+
+    );
+
+}
