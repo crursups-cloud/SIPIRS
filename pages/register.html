@@ -37,7 +37,10 @@ Registrasi SIPIRS
 
 <div class="mb-3">
 
-<label>Nama Lengkap</label>
+<label class="form-label">
+  Nama Lengkap
+  <span class=text-danger">*</span>
+</label>
 
 <input
 type="text"
@@ -53,7 +56,10 @@ required>
 
 <div class="mb-3">
 
-<label>NIP</label>
+<label class="form-label">
+NIP
+<span class=text-danger">*</span>  
+</label>
 
 <input
 type="text"
@@ -70,7 +76,10 @@ required>
 
 <div class="mb-3">
 
-<label>No HP</label>
+<label class="form-label">
+No.HP
+<span class=text-danger">*</span>
+</label>
 
 <input
 type="text"
@@ -85,7 +94,10 @@ class="form-control">
 
 <div class="mb-3">
 
-<label>Email</label>
+<label class="form-label">
+Email
+<span class=text-danger">*</span>
+</label>
 
 <input
 type="email"
@@ -101,7 +113,11 @@ required>
 
 <div class="mb-3">
 
-<label>Password</label>
+<label class="form-label">
+
+Password
+<span class="text-danger"">*</span>
+</label>
 
 <input
 type="password"
@@ -109,13 +125,21 @@ id="password"
 class="form-control"
 required>
 
+<button
+class="btn btn-outline-secondary"
+type="button"
+id="togglePassword">
+
+<i class="bi bi-eye"></i>
+
+</button>  
 </div>
 
 </div>
 
 <div class="col-md-6">
 
-<div class="mb-3">
+<div class="input-group">
 
 <label>Konfirmasi Password</label>
 
@@ -124,6 +148,15 @@ type="password"
 id="confirmPassword"
 class="form-control"
 required>
+
+<button
+class="btn btn-outline-secondary"
+type="button"
+id="toggleConfirmPassword">
+
+<i class="bi bi-eye"></i>
+
+</button>
 
 </div>
 
@@ -158,17 +191,6 @@ required>
 <option value="">Pilih Jabatan</option>
 
 </select>
-
-</div>
-
-<div class="mb-4">
-
-<label>ORCID (opsional)</label>
-
-<input
-type="text"
-id="orcid"
-class="form-control">
 
 </div>
 
