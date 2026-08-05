@@ -134,6 +134,24 @@ async function loadMasterData(){
     }
 
 }
+function bindDeleteAuthor(){
+
+    document
+    .querySelectorAll(".btn-remove-author")
+    .forEach(function(btn){
+
+        btn.onclick=function(){
+
+            this.closest(".author-item").remove();
+
+            renumberAuthor();
+
+        }
+
+    });
+
+}
+
 async function loadPublication(){
 
     try{
@@ -222,9 +240,104 @@ async function loadPublication(){
 
             document.getElementById("openAccessTidak")
             .checked=true;
-
+    
         }
 
+        const authorContainer =
+document.getElementById("authorContainer");
+
+authorContainer.innerHTML = "";
+
+p.authors.forEach(function(author,index){
+
+    authorContainer.innerHTML += `
+
+    <div class="author-card author-item">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <strong>Penulis ${index+1}</strong>
+            
+            <button
+                type="button"
+                class="btn btn-outline-danger btn-sm btn-remove-author">
+
+                <i class="bi bi-trash"></i>
+
+            </button>
+
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Nama Author
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control author-name"
+                    value="${author.NamaAuthor || ""}">
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label class="form-label">
+                    Afiliasi
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control author-affiliation"
+                    value="${author.Afiliasi || ""}">
+
+            </div>
+
+        </div>
+
+        <div class="mt-3">
+
+            <div class="form-check form-check-inline">
+
+                <input
+                    class="form-check-input author-rsup"
+                    type="checkbox"
+                    ${author.IsRSUP ? "checked" : ""}>
+
+                <label class="form-check-label">
+
+                    Author RSUP
+
+                </label>
+
+            </div>
+
+            <div class="form-check form-check-inline">
+
+                <input
+                    class="form-check-input author-corresponding"
+                    type="checkbox"
+                    ${author.IsCorresponding ? "checked" : ""}>
+
+                <label class="form-check-label">
+
+                    Corresponding
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+});
+      bindDeleteAuthor();
         document.getElementById("loadingData")
         .classList.add("d-none");
 
@@ -265,23 +378,56 @@ async function updatePublication(e){
 
         const uploadedPDF = await uploadPDF();
 
-        if(uploadedPDF){
-            
-            pdfURL = uploadedPDF
+        if(!uploadedPDF){
+            alert("Upload PDF gagal");
+            return;            
         }
+        pdfURL=uploadedPDF
 
     }
+    const authors = [];
+
+document
+.querySelectorAll(".author-item")
+.forEach(function(item){
+
+    const nama = item.querySelector(".author-name").value.trim();
+
+    if(nama=="") return;
+
+    authors.push({
+
+        name:nama,
+
+        affiliation:
+        item.querySelector(".author-affiliation").value,
+
+        isRSUP:
+        item.querySelector(".author-rsup").checked,
+
+        isCorresponding:
+        item.querySelector(".author-corresponding").checked
+
+    });
+
+});
     
+
     const data = {
 
         action: "updatePublication",
 
+        InputByUserID: localStorage.getItem("userID"),
+        
         PublikasiID: publicationID,
 
         Judul: document.getElementById("judul").value,
 
         JenisPublikasiID: document.getElementById("jenisPublikasi").value,
 
+        NamaJenisPublikasi: document.getElementById("jenisPublikasi")
+        .options[document.getElementById("jenisPublikasi").selectedIndex].text,  
+            
         NamaJurnalPenerbit: document.getElementById("namaJurnalPenerbit").value,
 
         Volume: document.getElementById("volume").value,
@@ -310,6 +456,9 @@ async function updatePublication(e){
 
         IndexingID: document.getElementById("indexing").value,
 
+        NamaIndexing: document.getElementById("indexing").options[
+        document.getElementById("indexing").selectedIndex].text, 
+        
         PeringkatIndex: document.getElementById("peringkatIndex").value,
 
         StatusOpenAccess:
@@ -317,7 +466,7 @@ async function updatePublication(e){
             ? "Ya"
             : "Tidak",
 
-        authors: []
+        authors: authors
 
     };
 
@@ -339,6 +488,103 @@ async function updatePublication(e){
 
 }
 document
+.getElementById("addAuthorBtn")
+.addEventListener("click",function(){
+
+    const container =
+    document.getElementById("authorContainer");
+
+    const jumlah =
+    container.querySelectorAll(".author-item").length+1;
+
+    container.insertAdjacentHTML("beforeend",`
+
+<div class="author-card author-item">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+<strong>Penulis ${jumlah}</strong>
+
+<button
+type="button"
+class="btn btn-outline-danger btn-sm btn-remove-author">
+
+<i class="bi bi-trash"></i>
+
+</button>
+
+</div>
+
+<div class="row g-3">
+
+<div class="col-md-6">
+
+<label class="form-label">
+Nama Author
+</label>
+
+<input
+type="text"
+class="form-control author-name">
+
+</div>
+
+<div class="col-md-6">
+
+<label class="form-label">
+Afiliasi
+</label>
+
+<input
+type="text"
+class="form-control author-affiliation">
+
+</div>
+
+</div>
+
+<div class="mt-3">
+
+<div class="form-check form-check-inline">
+
+<input
+class="form-check-input author-rsup"
+type="checkbox">
+
+<label class="form-check-label">
+
+Author RSUP
+
+</label>
+
+</div>
+
+<div class="form-check form-check-inline">
+
+<input
+class="form-check-input author-corresponding"
+type="checkbox">
+
+<label class="form-check-label">
+
+Corresponding
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+`);
+
+bindDeleteAuthor();
+renumberAuthor();
+    
+});
+
+document
 .getElementById("publicationForm")
 .addEventListener("submit", updatePublication);
 
@@ -351,3 +597,16 @@ document
         publicationID;
 
 });
+
+function renumberAuthor(){
+
+    document
+    .querySelectorAll(".author-item strong")
+    .forEach(function(item,index){
+
+        item.textContent =
+        "Penulis " + (index+1);
+
+    });
+
+}
