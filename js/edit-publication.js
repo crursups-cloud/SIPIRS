@@ -9,6 +9,79 @@ const publicationID =
 new URLSearchParams(window.location.search)
 .get("id");
 
+// ==========================================
+// Upload PDF
+// ==========================================
+
+async function uploadPDF(){
+
+    const file =
+    document.getElementById("pdfFile").files[0];
+
+    // kalau user tidak memilih PDF baru
+    if(!file){
+
+        return "";
+
+    }
+
+    const base64 =
+    await fileToBase64(file);
+
+    const formData =
+    new FormData();
+
+    formData.append("action","uploadPDF");
+    formData.append("filename",file.name);
+    formData.append("file",base64);
+
+    const response =
+    await fetch(API_URL,{
+        method:"POST",
+        body:formData
+    });
+
+    const result =
+    await response.json();
+
+    if(result.status){
+
+        return result.url;
+
+    }
+
+    alert(result.message);
+
+    return "";
+
+}
+
+
+// ==========================================
+// Convert File ke Base64
+// ==========================================
+
+function fileToBase64(file){
+
+    return new Promise(function(resolve){
+
+        const reader =
+        new FileReader();
+
+        reader.onload=function(){
+
+            resolve(reader.result.split(",")[1]);
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+let oldPDF = "";
+
 async function loadMasterData(){
 
     try{
@@ -123,8 +196,8 @@ async function loadPublication(){
         document.getElementById("linkPublikasi")
         .value=p.LinkPublikasi;
 
-        document.getElementById("linkPDFDrive")
-        .value=p.LinkPDFDrive;
+        // simpan link PDF lama
+        oldPDF = p.LinkPDFDrive || "";
 
         document.getElementById("abstract")
         .value=p.Abstract;
@@ -186,6 +259,28 @@ async function updatePublication(e){
 
     e.preventDefault();
 
+    let pdfURL = "";
+
+// upload jika memilih file baru
+if(document.getElementById("pdfFile").files.length > 0){
+
+    pdfURL = await uploadPDF();
+
+}else{
+
+    // kalau tidak upload baru,
+    // gunakan link lama
+    pdfURL = document.getElementById("linkPublikasiPDFLama").value;
+
+}
+    
+    // upload PDF jika ada file baru
+    const newPDF = await uploadPDF();
+
+    // kalau tidak upload file baru,
+    // tetap gunakan link PDF lama
+    const pdfURL = newPDF || oldPDF;
+    
     const data = {
 
         action: "updatePublication",
