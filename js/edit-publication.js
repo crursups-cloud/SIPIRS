@@ -56,7 +56,6 @@ async function uploadPDF(){
 
 }
 
-
 // ==========================================
 // Convert File ke Base64
 // ==========================================
@@ -259,27 +258,19 @@ async function updatePublication(e){
 
     e.preventDefault();
 
-    let pdfURL = "";
+    let pdfURL = oldPDF;
 
-// upload jika memilih file baru
-if(document.getElementById("pdfFile").files.length > 0){
+    // kalau user upload PDF baru
+    if(document.getElementById("pdfFile").files.length > 0){
 
-    pdfURL = await uploadPDF();
+        const uploadedPDF = await uploadPDF();
 
-}else{
+        if(uploadedPDF){
+            
+            pdfURL = uploadedPDF
+        }
 
-    // kalau tidak upload baru,
-    // gunakan link lama
-    pdfURL = document.getElementById("linkPublikasiPDFLama").value;
-
-}
-    
-    // upload PDF jika ada file baru
-    const newPDF = await uploadPDF();
-
-    // kalau tidak upload file baru,
-    // tetap gunakan link PDF lama
-    const pdfURL = newPDF || oldPDF;
+    }
     
     const data = {
 
