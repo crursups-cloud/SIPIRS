@@ -214,7 +214,7 @@ async function updatePublication(e){
 
         LinkPublikasi: document.getElementById("linkPublikasi").value,
 
-        LinkPDFDrive: document.getElementById("linkPDFDrive").value,
+        LinkPDFDrive: pdfURL,
 
         Abstract: document.getElementById("abstract").value,
 
