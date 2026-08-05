@@ -590,21 +590,21 @@ class="d-none">
 
         <label class="form-label">
 
-            Link PDF Google Drive
+            File PDF Publikasi
 
         </label>
 
         <input
-            type="url"
+            type="file"
             class="form-control"
-            id="linkPDFDrive"
+            id="pdfFile"
+            accept=".pdf"
             name="linkPDFDrive"
-            placeholder="Link Google Drive PDF publikasi">
+            placeholder="Upload File PDF Publikasi">
 
-        <div class="form-text">
-
-            Untuk sementara link PDF dimasukkan secara manual.
-            Fitur upload langsung ke Google Drive akan kita buat setelah modul utama selesai.
+        <div 
+           id="uploadStatus"
+           class="small mt-2 text-success">
 
         </div>
 
