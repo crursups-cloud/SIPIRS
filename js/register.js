@@ -2,19 +2,21 @@
 // SIPIRS - REGISTER
 // ==========================================
 
-async function loadRegisterMasterData(){
+// ==========================================
+// LOAD MASTER DATA
+// ==========================================
 
-    try{
+async function loadRegisterMasterData() {
 
-        const response =
-        await fetch(
+    try {
+
+        const response = await fetch(
             API_URL + "?action=getRegisterMasterData"
         );
 
-        const result =
-        await response.json();
+        const result = await response.json();
 
-        if(!result.status){
+        if (!result.status) {
 
             alert(result.message);
             return;
@@ -22,11 +24,14 @@ async function loadRegisterMasterData(){
         }
 
         // ==========================
-        // Departemen
+        // DEPARTEMEN
         // ==========================
 
         const departemen =
         document.getElementById("departemenID");
+
+        departemen.innerHTML =
+        '<option value="">Pilih Departemen</option>';
 
         result.departemen.forEach(function(item){
 
@@ -39,11 +44,14 @@ async function loadRegisterMasterData(){
         });
 
         // ==========================
-        // Jabatan
+        // JABATAN
         // ==========================
 
         const jabatan =
         document.getElementById("jabatanID");
+
+        jabatan.innerHTML =
+        '<option value="">Pilih Jabatan</option>';
 
         result.jabatan.forEach(function(item){
 
@@ -59,26 +67,43 @@ async function loadRegisterMasterData(){
 
     catch(err){
 
-        console.log(err);
+        console.error(err);
 
         alert("Gagal memuat data master.");
 
     }
 
 }
+
+// ==========================================
+// REGISTER
+// ==========================================
+
 async function registerUser(e){
 
     e.preventDefault();
 
     const password =
-    document.getElementById("password").value;
+    document.getElementById("password").value.trim();
 
-    const confirm =
-    document.getElementById("confirmPassword").value;
+    const confirmPassword =
+    document.getElementById("confirmPassword").value.trim();
 
-    if(password != confirm){
+    // ==========================
+    // VALIDASI
+    // ==========================
+
+    if(password !== confirmPassword){
 
         alert("Konfirmasi password tidak sama.");
+
+        return;
+
+    }
+
+    if(password.length < 8){
+
+        alert("Password minimal 8 karakter.");
 
         return;
 
@@ -89,13 +114,13 @@ async function registerUser(e){
         action:"registerUser",
 
         namaLengkap:
-        document.getElementById("namaLengkap").value,
+        document.getElementById("namaLengkap").value.trim(),
 
         nip:
-        document.getElementById("nip").value,
+        document.getElementById("nip").value.trim(),
 
         email:
-        document.getElementById("email").value,
+        document.getElementById("email").value.trim(),
 
         password:password,
 
@@ -106,17 +131,23 @@ async function registerUser(e){
         document.getElementById("jabatanID").value,
 
         nomorHP:
-        document.getElementById("nomorHP").value,
+        document.getElementById("nomorHP").value.trim(),
 
-        orcid:
-        document.getElementById("orcid").value,
-
-        // otomatis Peneliti
+        // Default Role = Peneliti
         roleID:"ROL-001"
 
     };
 
     try{
+
+        const btn =
+        document.querySelector("#registerForm button[type='submit']");
+
+        btn.disabled = true;
+
+        btn.innerHTML =
+        `<span class="spinner-border spinner-border-sm"></span>
+        Mendaftarkan...`;
 
         const response =
         await fetch(API_URL,{
@@ -130,11 +161,22 @@ async function registerUser(e){
         const result =
         await response.json();
 
-        alert(result.message);
+        btn.disabled = false;
+
+        btn.innerHTML = "Daftar";
 
         if(result.status){
 
-            window.location.href="login.html";
+            alert("Registrasi berhasil. Silakan login.");
+
+            window.location.href =
+            "login.html";
+
+        }
+
+        else{
+
+            alert(result.message);
 
         }
 
@@ -142,17 +184,59 @@ async function registerUser(e){
 
     catch(err){
 
-        console.log(err);
+        console.error(err);
 
         alert("Registrasi gagal.");
 
     }
 
 }
+
+// ==========================================
+// SHOW / HIDE PASSWORD
+// ==========================================
+
+function togglePassword(inputID, buttonID){
+
+    const input = document.getElementById(inputID);
+    const icon = document.querySelector(`#${buttonID} i`);
+
+    if(input.type==="password"){
+
+        input.type="text";
+        icon.className="bi bi-eye-slash";
+
+    }else{
+
+        input.type="password";
+        icon.className="bi bi-eye";
+
+    }
+
+}
+document.getElementById("togglePassword")
+.addEventListener("click", function(){
+
+    togglePassword("password","togglePassword");
+
+});
+
+document.getElementById("toggleConfirmPassword")
+.addEventListener("click", function(){
+
+    togglePassword(
+        "confirmPassword",
+        "toggleConfirmPassword"
+    );
+
+});
+
+// ==========================================
+// LOAD PAGE
+// ==========================================
+
 document.addEventListener(
-
     "DOMContentLoaded",
-
     function(){
 
         loadRegisterMasterData();
@@ -164,6 +248,33 @@ document.addEventListener(
             registerUser
         );
 
-    }
+        document
+        .getElementById("togglePassword")
+        .addEventListener(
+            "click",
+            function(){
 
+                togglePassword(
+                    "password",
+                    "togglePassword"
+                );
+
+            }
+        );
+
+        document
+        .getElementById("toggleConfirmPassword")
+        .addEventListener(
+            "click",
+            function(){
+
+                togglePassword(
+                    "confirmPassword",
+                    "toggleConfirmPassword"
+                );
+
+            }
+        );
+
+    }
 );
