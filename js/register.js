@@ -214,22 +214,7 @@ function togglePassword(inputID, buttonID){
     }
 
 }
-document.getElementById("togglePassword")
-.addEventListener("click", function(){
 
-    togglePassword("password","togglePassword");
-
-});
-
-document.getElementById("toggleConfirmPassword")
-.addEventListener("click", function(){
-
-    togglePassword(
-        "confirmPassword",
-        "toggleConfirmPassword"
-    );
-
-});
 
 // ==========================================
 // LOAD PAGE
