@@ -204,12 +204,14 @@ function togglePassword(inputID, buttonID){
     if(input.type==="password"){
 
         input.type="text";
-        icon.className="bi bi-eye-slash";
+        icon.classList.remove("bi-eye");
+        icon.classList.add("bi-eye-slash");
 
     }else{
 
         input.type="password";
-        icon.className="bi bi-eye";
+        icon.classList.remove("bi-eye-slash");
+        icon.classList.add("bi bi-eye");
 
     }
 
