@@ -204,12 +204,14 @@ function togglePassword(inputID, buttonID){
     if(input.type==="password"){
 
         input.type="text";
-        icon.className="bi bi-eye-slash";
+        icon.classList.remove("bi-eye");
+        icon.classList.add="bi bi-eye-slash";
 
     }else{
 
         input.type="password";
-        icon.className="bi bi-eye";
+        icon. classList.remove(bi-eye-slash");
+        icon.classList.add="bi bi-eye";
 
     }
 
@@ -235,31 +237,22 @@ document.addEventListener(
 
         document
         .getElementById("togglePassword")
-        .addEventListener(
-            "click",
-            function(){
+        .addEventListener("click",function(){
 
-                togglePassword(
-                    "password",
-                    "togglePassword"
-                );
+                togglePassword("password","togglePassword");
 
-            }
-        );
+            });
 
         document
         .getElementById("toggleConfirmPassword")
-        .addEventListener(
-            "click",
-            function(){
+        .addEventListener("click",function(){
 
                 togglePassword(
                     "confirmPassword",
                     "toggleConfirmPassword"
                 );
 
-            }
-        );
+            });
 
     }
 );
