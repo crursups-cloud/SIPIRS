@@ -39,7 +39,7 @@ Registrasi SIPIRS
 
 <label class="form-label">
   Nama Lengkap
-  <span class=text-danger">*</span>
+  <span class="text-danger">*</span>
 </label>
 
 <input
@@ -58,7 +58,7 @@ required>
 
 <label class="form-label">
 NIP
-<span class=text-danger">*</span>  
+<span class="text-danger">*</span>  
 </label>
 
 <input
@@ -78,13 +78,14 @@ required>
 
 <label class="form-label">
 No.HP
-<span class=text-danger">*</span>
+<span class="text-danger">*</span>
 </label>
 
 <input
 type="text"
 id="nomorHP"
-class="form-control">
+class="form-control"
+required>
 
 </div>
 
@@ -107,66 +108,76 @@ required>
 
 </div>
 
-<div class="row">
+<div class="col-md-6">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Password
+            <span class="text-danger">*</span>
+        </label>
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                id="password"
+                class="form-control"
+                required>
+
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="togglePassword">
+
+                <i class="bi bi-eye"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <div class="col-md-6">
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Konfirmasi Password
+            <span class="text-danger">*</span>
+        </label>
+
+        <div class="input-group">
+
+            <input
+                type="password"
+                id="confirmPassword"
+                class="form-control"
+                required>
+
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="toggleConfirmPassword">
+
+                <i class="bi bi-eye"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <div class="mb-3">
 
 <label class="form-label">
-
-Password
-<span class="text-danger"">*</span>
+    Departemen
+    <span class="text-danger">*</span>
 </label>
-
-<input
-type="password"
-id="password"
-class="form-control"
-required>
-
-<button
-class="btn btn-outline-secondary"
-type="button"
-id="togglePassword">
-
-<i class="bi bi-eye"></i>
-
-</button>  
-</div>
-
-</div>
-
-<div class="col-md-6">
-
-<div class="input-group">
-
-<label>Konfirmasi Password</label>
-
-<input
-type="password"
-id="confirmPassword"
-class="form-control"
-required>
-
-<button
-class="btn btn-outline-secondary"
-type="button"
-id="toggleConfirmPassword">
-
-<i class="bi bi-eye"></i>
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="mb-3">
-
-<label>Departemen</label>
 
 <select
 id="departemenID"
@@ -181,7 +192,10 @@ required>
 
 <div class="mb-3">
 
-<label>Jabatan</label>
+<label class="form-label">
+    Jabatan
+    <span class="text-danger">*</span>
+</label>
 
 <select
 id="jabatanID"
