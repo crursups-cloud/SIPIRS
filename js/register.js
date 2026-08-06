@@ -210,7 +210,7 @@ function togglePassword(inputID, buttonID){
     }else{
 
         input.type="password";
-        icon. classList.remove(bi-eye-slash");
+        icon. classList.remove("bi-eye-slash");
         icon.classList.add="bi bi-eye";
 
     }
