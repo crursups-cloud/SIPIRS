@@ -253,6 +253,58 @@ document.addEventListener(
                 );
 
             });
+        document
+.getElementById("password")
+.addEventListener(
+    "input",
+    checkPasswordMatch
+);
 
+document
+.getElementById("confirmPassword")
+.addEventListener(
+    "input",
+    checkPasswordMatch
+);
     }
 );
+
+function checkPasswordMatch(){
+
+    const password =
+    document.getElementById("password").value;
+
+    const confirm =
+    document.getElementById("confirmPassword").value;
+
+    const warning =
+    document.getElementById("passwordWarning");
+
+    if(confirm === ""){
+
+        warning.classList.add("d-none");
+        return;
+
+    }
+
+    if(password === confirm){
+
+        warning.classList.remove("text-danger");
+        warning.classList.add("text-success");
+
+        warning.innerHTML =
+        '<i class="bi bi-check-circle-fill"></i> Password cocok';
+
+    }else{
+
+        warning.classList.remove("text-success");
+        warning.classList.add("text-danger");
+
+        warning.innerHTML =
+        '<i class="bi bi-x-circle-fill"></i> Password tidak sama';
+
+    }
+
+    warning.classList.remove("d-none");
+
+}
