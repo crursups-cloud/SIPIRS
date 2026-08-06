@@ -141,7 +141,7 @@ async function registerUser(e){
     try{
 
         const btn =
-        document.querySelector("#registerForm button[type='submit']");
+        document.getElementById("btnRegister");
 
         btn.disabled = true;
 
@@ -211,7 +211,7 @@ function togglePassword(inputID, buttonID){
 
         input.type="password";
         icon.classList.remove("bi-eye-slash");
-        icon.classList.add("bi bi-eye");
+        icon.classList.add("bi-eye");
 
     }
 
