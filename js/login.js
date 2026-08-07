@@ -1,3 +1,7 @@
+// ==========================================
+// SIPIRS - LOGIN
+// ==========================================
+
 document
 .getElementById("loginForm")
 .addEventListener("submit", loginUser);
