@@ -1,5 +1,3 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbx_nglSPAgsqihJ3Xn_oIj8EComgbuAtXsJ7V14J4tycZR_osEHpCZeXo6iMK3H8_YJ/exec";
-
 document
 .getElementById("loginForm")
 .addEventListener("submit", loginUser);
@@ -56,7 +54,7 @@ function togglePassword(){
 
     if(input.type==="password"){
 
-        input.type="text";
+        input.type="text";  
 
         icon.classList.remove("bi-eye");
         icon.classList.add("bi-eye-slash");
